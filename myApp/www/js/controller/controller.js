@@ -26,27 +26,31 @@ angular.module('starter.controller', [])
 	};
 }])
 
-.controller('DashboardController', ['$scope', '$ionicLoading', 'loginFactory', 'dashboardFactory', function($scope, $ionicLoading, loginFactory, dashboardFactory) {
+.controller('DashboardController', ['$scope', '$ionicLoading', 'loginFactory', 'dashboardFactory', '$ionicSideMenuDelegate', function($scope, $ionicLoading, loginFactory, dashboardFactory, $ionicSideMenuDelegate) {
 	console.log('DashboardController');
 	$scope.user = loginFactory.getUser();
 	console.log($scope.user);
 
-	$scope.updateUserDetails = function (user) {
-		$ionicLoading.show({
-			content: 'loading',
-			showBackdrop: false
-		});
-		console.log('updating controller');
-		dashboardFactory.updateDetails(user)
-			.success(function(response, status) {
-				console.log(response);
-				$ionicLoading.hide();
-			})
-			.error(function(data, status, headers, config) {
-				console.log('error');
-				$ionicLoading.hide();
-			});
-	};
+		  $scope.toggleLeftSideMenu = function() {
+    		$ionicSideMenuDelegate.toggleLeft();
+  		};
+
+	// $scope.updateUserDetails = function (user) {
+	// 	$ionicLoading.show({
+	// 		content: 'loading',
+	// 		showBackdrop: false
+	// 	});
+	// 	console.log('updating controller');
+	// 	dashboardFactory.updateDetails(user)
+	// 		.success(function(response, status) {
+	// 			console.log(response);
+	// 			$ionicLoading.hide();
+	// 		})
+	// 		.error(function(data, status, headers, config) {
+	// 			console.log('error');
+	// 			$ionicLoading.hide();
+	// 		});
+	// };
 }])
 
 .controller('MapController', function($scope, $ionicLoading) {

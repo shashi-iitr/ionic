@@ -1,5 +1,40 @@
-<ion-view view-title=userName class="title">
-<br><br><br>
+  <ion-side-menus>
+    <ion-side-menu-content>
+      <button ng-click="toggleLeftSideMenu()" class="button button-icon icon ion-navicon">
+      </button>
+    </ion-side-menu-content>
+    <ion-side-menu side="left">
+<div class="list">
+    <a class="item item-icon-left" href="#">
+    <i class="icon ion-ios-person-outline"></i>
+    {{ user['name'] }}
+  </a>
+
+    <a class="item item-icon-left" href="#">
+    <i class="icon ion-grid"></i>
+    grid demo
+  </a>
+  <a class="item item-icon-left" href="#">
+    <i class="icon ion-ios-list-outline"></i>
+    list map
+  </a>
+    <a class="item item-icon-left" href="#">
+    <i class="icon ion-map"></i>
+    map demo
+  </a>
+
+
+
+</div>
+    <ion-side-menu>
+  </ion-side-menus>
+
+
+<!-- 
+<ion-content>
+
+ <br><br><br>
+
 
 <div> welcome {{user['name']}}, you can update your personal informations.</div>
 
@@ -39,4 +74,5 @@
 
 
 </div>
-</ion-view>
+</ion-content>
+ -->
