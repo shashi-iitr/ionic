@@ -2,9 +2,12 @@ angular.module('starter.controller', [])
 
 .controller('LoginController', ['$scope', '$window', '$ionicLoading', 'loginFactory', function($scope ,$window ,$ionicLoading, loginFactory) {
 	console.log('LoginController');
+
 	var user = {};
 
 	$scope.signIn = function(user) {
+		window.localStorage['userCredentials'] = JSON.stringify(user);
+
 		$ionicLoading.show({
 			content: 'loading',
 			showBackdrop: false
@@ -24,6 +27,13 @@ angular.module('starter.controller', [])
 				$ionicLoading.hide();
 			});
 	};
+
+	$scope.userCredentials = JSON.parse($window.localStorage['userCredentials'] || '{}');
+	console.log($scope.userCredentials);
+	if ($scope.userCredentials['email']) {
+		$scope.signIn($scope.userCredentials);
+	};
+
 }])
 
 .controller('DashboardController', ['$scope', '$ionicLoading', 'loginFactory', 'dashboardFactory', '$ionicSideMenuDelegate', function($scope, $ionicLoading, loginFactory, dashboardFactory, $ionicSideMenuDelegate) {
