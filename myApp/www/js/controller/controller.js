@@ -44,23 +44,29 @@ angular.module('starter.controller', [])
 		  $scope.toggleLeftSideMenu = function() {
     		$ionicSideMenuDelegate.toggleLeft();
   		};
+}])
 
-	// $scope.updateUserDetails = function (user) {
-	// 	$ionicLoading.show({
-	// 		content: 'loading',
-	// 		showBackdrop: false
-	// 	});
-	// 	console.log('updating controller');
-	// 	dashboardFactory.updateDetails(user)
-	// 		.success(function(response, status) {
-	// 			console.log(response);
-	// 			$ionicLoading.hide();
-	// 		})
-	// 		.error(function(data, status, headers, config) {
-	// 			console.log('error');
-	// 			$ionicLoading.hide();
-	// 		});
-	// };
+.controller('UpdateDetailsController', ['$scope', '$ionicLoading', 'loginFactory', 'updateUserDetailFactory', function($scope, $ionicLoading, loginFactory, updateUserDetailFactory) {
+	console.log('UpdateDetailsController');
+	$scope.user = loginFactory.getUser();
+	console.log($scope.user);
+
+	$scope.updateUserDetails = function (user) {
+	$ionicLoading.show({
+		content: 'loading',
+		showBackdrop: false
+	});
+	console.log('updating controller');
+	updateUserDetailFactory.updateDetails(user)
+		.success(function(response, status) {
+			console.log(response);
+			$ionicLoading.hide();
+		})
+		.error(function(data, status, headers, config) {
+			console.log('error');
+			$ionicLoading.hide();
+		});
+	};
 }])
 
 .controller('ListController', ['$scope', 'listFactory', function($scope, listFactory) {

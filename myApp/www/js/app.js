@@ -33,6 +33,13 @@ angular.module('starter', ['ionic','starter.controller', 'starter.directive'])
     controller: 'ListController'
   })
 
+  .state('updateUserDetail', {
+    url:'/updateUserDetail',
+    templateUrl: 'templates/updateUserDetail.html',
+    controller: 'UpdateDetailsController'
+  })
+
+
   .state('dashboard', {
     url: '/dashboard',
     templateUrl: 'templates/dashboard.html',

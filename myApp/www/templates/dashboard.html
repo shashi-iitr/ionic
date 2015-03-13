@@ -5,7 +5,7 @@
     </ion-side-menu-content>
     <ion-side-menu side="left">
 <div class="list">
-    <a class="item item-icon-left" href="#">
+    <a class="item item-icon-left" href="#/updateUserDetail">
     <i class="icon ion-ios-person-outline"></i>
     {{ user['name'] }}
   </a>
@@ -28,51 +28,3 @@
 </div>
     <ion-side-menu>
   </ion-side-menus>
-
-
-<!-- 
-<ion-content>
-
- <br><br><br>
-
-
-<div> welcome {{user['name']}}, you can update your personal informations.</div>
-
-
-<div class="list list-inset">
-  <label class="item item-input">
-    <input type="text" ng-model=user.name placeholder="Name">
-  </label>
-  <label class="item item-input">
-    <input type="text" ng-model=user.email placeholder="Email Id">
-  </label>
-    <label class="item item-input">
-    <input type="text" ng-model=user.companyName placeholder="Company name">
-  </label>
-
-    <label class="item item-input">
-    <input type="text" ng-model=user.addressLine1 placeholder="Address 1">
-  </label>
-    <label class="item item-input">
-    <input type="text" ng-model=user.addressLine2 placeholder="Address 2">
-  </label>
-  <label class="item item-input">
-    <input type="text" ng-model=user.city placeholder="City">
-  </label>
-    <label class="item item-input">
-    <input type="text" ng-model=user.state placeholder="State">
-  </label>
-  <label class="item item-input">
-    <input type="text" ng-model=user.pincode placeholder="Pincode">
-  </label>
-
-  <br>
-  <button ng-click="updateUserDetails(user)" class="button button-block button-positive">
-  Submit
-</button>
-
-
-
-</div>
-</ion-content>
- -->
