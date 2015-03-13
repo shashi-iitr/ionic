@@ -15,17 +15,17 @@ angular.module('starter.controller', [])
 
 		console.log('sign in controller');
 		loginFactory.login(user)
-			.success(function(response, status) {
-				console.log(response);
-				user = response['user'];
-				loginFactory.setUser(user);
-				$ionicLoading.hide();
-				$window.location.href = '#/dashboard';
-			})
-			.error(function(data, status, headers, config) {
-				console.log('error');
-				$ionicLoading.hide();
-			});
+		.success(function(response, status) {
+			console.log(response);
+			user = response['user'];
+			loginFactory.setUser(user);
+			$ionicLoading.hide();
+			$window.location.href = '#/dashboard';
+		})
+		.error(function(data, status, headers, config) {
+			console.log('error');
+			$ionicLoading.hide();
+		});
 	};
 
 	$scope.userCredentials = JSON.parse($window.localStorage['userCredentials'] || '{}');
@@ -41,9 +41,9 @@ angular.module('starter.controller', [])
 	$scope.user = loginFactory.getUser();
 	console.log($scope.user);
 
-		  $scope.toggleLeftSideMenu = function() {
-    		$ionicSideMenuDelegate.toggleLeft();
-  		};
+	$scope.toggleLeftSideMenu = function() {
+		$ionicSideMenuDelegate.toggleLeft();
+	};
 }])
 
 .controller('UpdateDetailsController', ['$scope', '$ionicLoading', 'loginFactory', 'updateUserDetailFactory', function($scope, $ionicLoading, loginFactory, updateUserDetailFactory) {
@@ -52,12 +52,12 @@ angular.module('starter.controller', [])
 	console.log($scope.user);
 
 	$scope.updateUserDetails = function (user) {
-	$ionicLoading.show({
-		content: 'loading',
-		showBackdrop: false
-	});
-	console.log('updating controller');
-	updateUserDetailFactory.updateDetails(user)
+		$ionicLoading.show({
+			content: 'loading',
+			showBackdrop: false
+		});
+		console.log('updating controller');
+		updateUserDetailFactory.updateDetails(user)
 		.success(function(response, status) {
 			console.log(response);
 			$ionicLoading.hide();
@@ -69,58 +69,73 @@ angular.module('starter.controller', [])
 	};
 }])
 
-.controller('ListController', ['$scope', 'listFactory', function($scope, listFactory) {
+.controller('ListController', ['$scope', '$ionicPopup', 'listFactory', function($scope, $ionicPopup, listFactory) {
 	console.log('ListController');
 	$scope.items = listFactory.getList();
 	console.log($scope.items);
 	$scope.doRefresh = function() {
-	    $scope.$broadcast('scroll.refreshComplete');
-	    $scope.$apply()
-  };
+		$scope.$broadcast('scroll.refreshComplete');
+		$scope.$apply()
+	};
+
+	$scope.showAlert = function(item) {
+		var confirmPopup = $ionicPopup.confirm({
+			title: item,
+			template: 'Are you sure you want to have this ' + item + ' ?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+				console.log('You are sure');
+			} else {
+				console.log('You are not sure');
+			}
+		});
+
+	};
 }])
 
 .controller('MapController', function($scope, $ionicLoading) {
 	console.log('MapController');
 
-      if (document.readyState === "complete") {
-        initialize();
-      } else {
-        google.maps.event.addDomListener(window, 'load', initialize);
-      }
+	if (document.readyState === "complete") {
+		initialize();
+	} else {
+		google.maps.event.addDomListener(window, 'load', initialize);
+	}
 
-    function initialize () {
-    			$ionicLoading.show({
+	function initialize () {
+		$ionicLoading.show({
 			content: 'loading',
 			showBackdrop: true
 		});
 
-    	var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-        var mapOptions = {
-            center: myLatlng,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
- 
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
- 		console.log(map);
-        navigator.geolocation.getCurrentPosition(function(pos) {
-            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            var geocoder = new google.maps.Geocoder();
+		var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+		var mapOptions = {
+			center: myLatlng,
+			zoom: 16,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+
+		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		console.log(map);
+		navigator.geolocation.getCurrentPosition(function(pos) {
+			map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+			var geocoder = new google.maps.Geocoder();
 			var latlng = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
 			geocoder.geocode({'latLng': latlng}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
+				if (status == google.maps.GeocoderStatus.OK) {
 					var myLocation = new google.maps.Marker({
-	                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-	                map: map,
-	                title: results[0]['formatted_address']
-	            });
-			} 
-});
+						position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+						map: map,
+						title: results[0]['formatted_address']
+					});
+				} 
+			});
 
-            $ionicLoading.hide();
-        });
- 
-        $scope.map = map;
+			$ionicLoading.hide();
+		});
 
-    }
+		$scope.map = map;
+
+	}
 });

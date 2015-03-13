@@ -8,7 +8,7 @@
     <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
     </ion-refresher>
     <ion-list>
-  <ion-item ng-repeat="item in items">
+  <ion-item ng-repeat="item in items" ng-click="showAlert(item)">
     {{item}}
   </ion-item>
     </ion-list>     
