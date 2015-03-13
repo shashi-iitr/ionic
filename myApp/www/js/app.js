@@ -27,6 +27,12 @@ angular.module('starter', ['ionic','starter.controller', 'starter.directive'])
     controller: 'MapController'
   })
 
+  .state('list', {
+    url:'/list',
+    templateUrl: 'templates/list.html',
+    controller: 'ListController'
+  })
+
   .state('dashboard', {
     url: '/dashboard',
     templateUrl: 'templates/dashboard.html',

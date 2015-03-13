@@ -1,14 +1,13 @@
 <ion-view view-title="Map" class="title">
     <ion-header-bar class="bar-stable">
+    <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/dashboard">Back</a>
+
       <h1 class="title">Map</h1>
     </ion-header-bar>
 
     <ion-content scroll="false">
-      <map on-create="mapCreated(map)"></map>
+    <div id="map" data-tap-disabled="true"></div>
     </ion-content>
 
-    <ion-footer-bar class="bar-stable">
-      <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate"></a>
-    </ion-footer-bar>
 </ion-view>
 

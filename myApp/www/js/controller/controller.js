@@ -10,7 +10,7 @@ angular.module('starter.controller', [])
 
 		$ionicLoading.show({
 			content: 'loading',
-			showBackdrop: false
+			showBackdrop: true
 		});
 
 		console.log('sign in controller');
@@ -63,30 +63,47 @@ angular.module('starter.controller', [])
 	// };
 }])
 
+.controller('ListController', ['$scope', 'listFactory', function($scope, listFactory) {
+	console.log('ListController');
+	$scope.items = listFactory.getList();
+	console.log($scope.items);
+}])
+
 .controller('MapController', function($scope, $ionicLoading) {
 	console.log('MapController');
 
-	$scope.mapCreated = function(map) {
-		$scope.map = map;
-	};
+      if (document.readyState === "complete") {
+        initialize();
+      } else {
+        google.maps.event.addDomListener(window, 'load', initialize);
+      }
 
-	$scope.centerOnMe = function () {
-		console.log("Centering");
-		if (!$scope.map) {
-			return;
-		}
-
-		$scope.loading = $ionicLoading.show({
-			content: 'Getting current location...',
-			showBackdrop: false
+    function initialize () {
+    			$ionicLoading.show({
+			content: 'loading',
+			showBackdrop: true
 		});
 
-		navigator.geolocation.getCurrentPosition(function (pos) {
-			console.log('Got pos', pos);
-			$scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-			$scope.loading.hide();
-		}, function (error) {
-			alert('Unable to get location: ' + error.message);
-		});
-	};
+    	var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+ 
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+ 		console.log(map);
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            var myLocation = new google.maps.Marker({
+                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+                map: map,
+                title: "My Location"
+            });
+            $ionicLoading.hide();
+        });
+ 
+        $scope.map = map;
+
+    }
 });
