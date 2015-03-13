@@ -1,3 +1,16 @@
-<ul class="list" ng-repeat="list in items">
-    <li class="item">{{list}}</li>
-</ul>
+<ion-header-bar class="bar-stable">
+<a class="button icon-left ion-chevron-left button-clear button-dark" href="#/dashboard"></a>
+
+<h1 class="title">List</h1>
+</ion-header-bar>
+
+  <ion-content>
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+  <ion-item ng-repeat="item in items">
+    {{item}}
+  </ion-item>
+    </ion-list>     
+  </ion-content>
+

@@ -73,6 +73,10 @@ angular.module('starter.controller', [])
 	console.log('ListController');
 	$scope.items = listFactory.getList();
 	console.log($scope.items);
+	$scope.doRefresh = function() {
+	    $scope.$broadcast('scroll.refreshComplete');
+	    $scope.$apply()
+  };
 }])
 
 .controller('MapController', function($scope, $ionicLoading) {
