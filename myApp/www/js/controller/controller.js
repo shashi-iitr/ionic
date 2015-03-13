@@ -95,11 +95,18 @@ angular.module('starter.controller', [])
  		console.log(map);
         navigator.geolocation.getCurrentPosition(function(pos) {
             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            var myLocation = new google.maps.Marker({
-                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-                map: map,
-                title: "My Location"
-            });
+            var geocoder = new google.maps.Geocoder();
+			var latlng = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+			geocoder.geocode({'latLng': latlng}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+					var myLocation = new google.maps.Marker({
+	                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+	                map: map,
+	                title: results[0]['formatted_address']
+	            });
+			} 
+});
+
             $ionicLoading.hide();
         });
  
