@@ -3,3 +3,9 @@
 	height: 100%;
 	display: block;
 }
+
+.item.item-avatar-left {
+	border-top-left-radius: 10px !important;
+	border-top-right-radius: 10px !important;
+	background-color: #9ff59f;
+}

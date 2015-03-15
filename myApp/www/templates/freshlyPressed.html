@@ -1,0 +1,21 @@
+<ion-header-bar class="bar-stable">
+<a class="button icon-left ion-chevron-left button-clear button-dark" href="#/dashboard"></a>
+
+<h1 class="title">Freshly pressed</h1>
+</ion-header-bar>
+<ion-content>
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
+    </ion-refresher>
+	<div class="card-list" ng-repeat="post in posts">
+		<div class='item item-avatar-left'>
+			<img ng-src="{{post.author.avatar_URL}}" alt="">
+			<h2>{{post.author.nice_name}}</h2>
+			<p><a ng-href="{{post.author.profile_URL}}">{{post.author.profile_URL}}</a></p>
+		</div>
+		<div class='item item-body'>
+				<h1>{{post.title}}</h1>
+				<div ng-bind-html="post.content">
+				</div>
+		</div>
+	</div>			
+</ion-content>

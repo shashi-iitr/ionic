@@ -27,8 +27,12 @@ angular.module('starter.controller', [])
 			$ionicLoading.hide();
 		});
 	};
-
-	$scope.userCredentials = JSON.parse($window.localStorage['userCredentials'] || '{}');
+	console.log($window.localStorage['userCredentials']);
+	if ($window.localStorage['userCredentials'] !== 'undefined') {
+		$scope.userCredentials = JSON.parse($window.localStorage['userCredentials']);
+	} else {
+		$scope.userCredentials = {};
+	}
 	console.log($scope.userCredentials);
 	if ($scope.userCredentials['email']) {
 		$scope.signIn($scope.userCredentials);
@@ -46,6 +50,43 @@ angular.module('starter.controller', [])
 	};
 }])
 
+.controller('GridController', ['$scope', 'listFactory', function($scope, listFactory) {
+	console.log('GridController');
+	$scope.items = listFactory.getList();
+}])
+
+.controller('FreshlyPressedController', ['$scope', '$ionicLoading', 'freshlyPressedFactory', function($scope, $ionicLoading, freshlyPressedFactory) {
+	console.log('FreshlyPressedController');
+	$scope.posts = [];
+	$ionicLoading.show({
+		content: 'loading',
+		showBackdrop: true
+	});
+
+	$scope.doRefresh = function () {
+		freshlyPressedFactory.getBlogs()
+		.success(function(response, status) {
+			console.log(response);
+			$scope.$broadcast('scroll.refreshComplete');
+			$scope.posts = response.posts;
+		})
+		.error(function(data, status, headers, config) {
+			console.log('error');
+		});
+	}
+
+	freshlyPressedFactory.getBlogs()
+	.success(function(response, status) {
+		console.log(response);
+		$ionicLoading.hide();
+		$scope.posts = response.posts;
+	})
+	.error(function(data, status, headers, config) {
+		console.log('error');
+	});
+
+}])
+
 .controller('UpdateDetailsController', ['$scope', '$ionicLoading', 'loginFactory', 'updateUserDetailFactory', function($scope, $ionicLoading, loginFactory, updateUserDetailFactory) {
 	console.log('UpdateDetailsController');
 	$scope.user = loginFactory.getUser();
@@ -54,7 +95,7 @@ angular.module('starter.controller', [])
 	$scope.updateUserDetails = function (user) {
 		$ionicLoading.show({
 			content: 'loading',
-			showBackdrop: false
+			showBackdrop: true
 		});
 		console.log('updating controller');
 		updateUserDetailFactory.updateDetails(user)

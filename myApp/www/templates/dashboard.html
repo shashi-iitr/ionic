@@ -1,34 +1,41 @@
-  <ion-side-menus>
-    <ion-side-menu-content>
-      <button ng-click="toggleLeftSideMenu()" class="button button-icon icon ion-navicon">
-      </button>
-    </ion-side-menu-content>
-    <ion-side-menu side="left">
-        <header class="bar bar-header bar-stable">
+<ion-side-menus>
+  <ion-side-menu-content>
+    <button ng-click="toggleLeftSideMenu()" class="button button-icon icon ion-navicon">
+    </button>
+  </ion-side-menu-content>
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-stable">
     </header>
-        <ion-content class="has-header mymenu">
+  <ion-content class="has-header mymenu">
 
 
-<div class="list">
+  <div class="list">
     <a class="item item-icon-left" href="#/updateUserDetail">
-    <i class="icon ion-ios-person-outline"></i>
-    {{ user['name'] }}
-  </a>
+      <i class="icon ion-ios-person-outline"></i>
+      {{ user['name'] }}
+    </a>
 
-    <a class="item item-icon-left" href="#">
-    <i class="icon ion-grid"></i>
-    grid demo
-  </a>
-  <a menu-close class="item item-icon-left" href="#/list">
-    <i class="icon ion-ios-list-outline"></i>
-    list map
-  </a>
+    <a menu-close class="item item-icon-left" href="#/grid">
+      <i class="icon ion-grid"></i>
+      grid demo
+    </a>
+
+    <a menu-close class="item item-icon-left" href="#/list">
+      <i class="icon ion-ios-list-outline"></i>
+      list map
+    </a>
+
     <a menu-close class="item item-icon-left" href="#/map">
-    <i class="icon ion-map"></i>
-    map demo
-  </a>
+      <i class="icon ion-map"></i>
+      map demo
+    </a>
+    
+    <a menu-close class="item item-icon-left" href="#/freshlyPressed">
+      <i class="icon ion-university"></i>
+      freshly pressed
+    </a>
 
-</div>
-</ion-content>
-    <ion-side-menu>
-  </ion-side-menus>
+  </div>
+  </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

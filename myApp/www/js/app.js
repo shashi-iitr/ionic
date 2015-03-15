@@ -21,6 +21,12 @@ angular.module('starter', ['ionic','starter.controller', 'starter.directive'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+  .state('freshlyPressed', {
+    url:'/freshlyPressed',
+    templateUrl: 'templates/freshlyPressed.html',
+    controller: 'FreshlyPressedController'
+  })
+
   .state('map', {
     url:'/map',
     templateUrl: 'templates/map.html',
@@ -33,12 +39,17 @@ angular.module('starter', ['ionic','starter.controller', 'starter.directive'])
     controller: 'ListController'
   })
 
+  .state('grid', {
+    url:'/grid',
+    templateUrl: 'templates/grid.html',
+    controller: 'GridController'
+  })
+
   .state('updateUserDetail', {
     url:'/updateUserDetail',
     templateUrl: 'templates/updateUserDetail.html',
     controller: 'UpdateDetailsController'
   })
-
 
   .state('dashboard', {
     url: '/dashboard',
