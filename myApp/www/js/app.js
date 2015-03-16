@@ -33,6 +33,12 @@ angular.module('starter', ['ionic','starter.controller', 'starter.directive'])
     controller: 'MapController'
   })
 
+    .state('camera', {
+    url:'/camera',
+    templateUrl: 'templates/camera.html',
+    controller: 'CameraController'
+  })
+
   .state('list', {
     url:'/list',
     templateUrl: 'templates/list.html',

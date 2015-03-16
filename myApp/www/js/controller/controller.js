@@ -4,9 +4,11 @@ angular.module('starter.controller', [])
 	console.log('LoginController');
 
 	var user = {};
+	$scope.userCredentials = {'email':'veeru.agrawal@gmail.com',
+	'password': '123'};
 
 	$scope.signIn = function(user) {
-		window.localStorage['userCredentials'] = JSON.stringify(user);
+		// window.localStorage['userCredentials'] = JSON.stringify(user);
 
 		$ionicLoading.show({
 			content: 'loading',
@@ -27,16 +29,16 @@ angular.module('starter.controller', [])
 			$ionicLoading.hide();
 		});
 	};
-	console.log($window.localStorage['userCredentials']);
-	if ($window.localStorage['userCredentials'] !== 'undefined') {
-		$scope.userCredentials = JSON.parse($window.localStorage['userCredentials']);
-	} else {
-		$scope.userCredentials = {};
-	}
-	console.log($scope.userCredentials);
-	if ($scope.userCredentials['email']) {
-		$scope.signIn($scope.userCredentials);
-	};
+	// console.log($window.localStorage['userCredentials']);
+	// if ($window.localStorage['userCredentials'] !== 'undefined') {
+	// 	$scope.userCredentials = JSON.parse($window.localStorage['userCredentials']);
+	// } else {
+	// 	$scope.userCredentials = {};
+	// }
+	// console.log($scope.userCredentials);
+	// if ($scope.userCredentials['email']) {
+	// 	$scope.signIn($scope.userCredentials);
+	// };
 
 }])
 
@@ -53,6 +55,27 @@ angular.module('starter.controller', [])
 .controller('GridController', ['$scope', 'listFactory', function($scope, listFactory) {
 	console.log('GridController');
 	$scope.items = listFactory.getList();
+}])
+
+.controller('CameraController', ['$scope', function($scope) {
+	console.log('CameraController');
+	$scope.cameraPic = "";
+	$scope.takePicture = function(){   
+navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+    destinationType: Camera.DestinationType.DATA_URL
+});
+
+function onSuccess(imageData) {
+	alert("data:image/jpeg;base64," + imageData);
+	// $scope.cameraPic = "data:image/jpeg;base64," + imageData;
+    // var image = document.getElementById('myImage');
+    // image.src = "data:image/jpeg;base64," + imageData;
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
+    };
 }])
 
 .controller('FreshlyPressedController', ['$scope', '$ionicLoading', 'freshlyPressedFactory', function($scope, $ionicLoading, freshlyPressedFactory) {

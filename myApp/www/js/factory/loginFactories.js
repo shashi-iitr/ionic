@@ -10,7 +10,7 @@
 				method: 'POST',
 				url: 'http://54.169.35.69:8080/api/doLogin',
 				data: user,
-				headers: {'Content-Type': 'application/json'},
+				headers: {'Content-Type': 'application/json'}
 			});
 
 			return request;
