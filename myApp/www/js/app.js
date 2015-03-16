@@ -45,12 +45,6 @@ angular.module('starter', ['ionic','starter.controller', 'starter.directive'])
     controller: 'ContactController'
   })
 
-  .state('contactModal', {
-    url:'/contactModal',
-    templateUrl: 'templates/contactModal.html',
-    controller: 'ContactController'
-  })
-
   .state('list', {
     url:'/list',
     templateUrl: 'templates/list.html',
