@@ -1,14 +1,14 @@
 angular.module('starter.controller', [])
 
-.controller('LoginController', ['$scope', '$window', '$ionicLoading', 'loginFactory', function($scope ,$window ,$ionicLoading, loginFactory) {
+.controller('LoginController', ['$scope', '$ionicLoading', 'loginFactory', function($scope ,$ionicLoading, loginFactory) {
 	console.log('LoginController');
 
 	var user = {};
-	$scope.userCredentials = {'email':'veeru.agrawal@gmail.com',
-	'password': '123'};
+	// $scope.userCredentials = {'email':'veeru.agrawal@gmail.com',
+	// 'password': '123'};
 
 	$scope.signIn = function(user) {
-		// window.localStorage['userCredentials'] = JSON.stringify(user);
+		window.localStorage['userCredentials'] = JSON.stringify(user);
 
 		$ionicLoading.show({
 			content: 'loading',
@@ -22,23 +22,23 @@ angular.module('starter.controller', [])
 			user = response['user'];
 			loginFactory.setUser(user);
 			$ionicLoading.hide();
-			$window.location.href = '#/dashboard';
+			window.location.href = '#/dashboard';
 		})
 		.error(function(data, status, headers, config) {
 			console.log('error');
 			$ionicLoading.hide();
 		});
 	};
-	// console.log($window.localStorage['userCredentials']);
-	// if ($window.localStorage['userCredentials'] !== 'undefined') {
-	// 	$scope.userCredentials = JSON.parse($window.localStorage['userCredentials']);
-	// } else {
-	// 	$scope.userCredentials = {};
-	// }
-	// console.log($scope.userCredentials);
-	// if ($scope.userCredentials['email']) {
-	// 	$scope.signIn($scope.userCredentials);
-	// };
+	console.log(window.localStorage['userCredentials']);
+	if(!angular.isUndefined(window.localStorage['userCredentials'])) {
+		$scope.userCredentials = JSON.parse(window.localStorage['userCredentials']);
+	} else {
+		$scope.userCredentials = {};
+	}
+	console.log($scope.userCredentials);
+	if ($scope.userCredentials['email']) {
+		$scope.signIn($scope.userCredentials);
+	};
 
 }])
 
@@ -57,25 +57,52 @@ angular.module('starter.controller', [])
 	$scope.items = listFactory.getList();
 }])
 
+.controller('ContactController', ['$scope', 'contactFactory', '$ionicModal', function($scope, contactFactory, $ionicModal) {
+	console.log('ContactController');
+	$scope.contacts = contactFactory.getContactDetails();
+
+	$ionicModal.fromTemplateUrl('templates/contactModal.html', {
+	  scope: $scope,
+	  animation: 'slide-in-up'
+	  }).then(function(modal) {
+	    $scope.modal = modal;
+	  });  
+
+	  $scope.openModal = function(contact) {
+	  	$scope.contact = contact;
+	  	console.log(contact);
+	    $scope.modal.show();
+	  };
+
+	  $scope.closeModal = function() {
+	    $scope.modal.hide();
+	  };
+
+	  $scope.$on('$destroy', function() {
+	    $scope.modal.remove();
+	  });
+
+}])
+
 .controller('CameraController', ['$scope', function($scope) {
 	console.log('CameraController');
-	$scope.cameraPic = "";
-	$scope.takePicture = function(){   
-navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-    destinationType: Camera.DestinationType.DATA_URL
-});
+	// $scope.cameraPic = "";
+	// $scope.takePicture = function(){   
+	// 	navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+	// 	    destinationType: Camera.DestinationType.DATA_URL
+	// 	});
 
-function onSuccess(imageData) {
-	alert("data:image/jpeg;base64," + imageData);
-	// $scope.cameraPic = "data:image/jpeg;base64," + imageData;
-    // var image = document.getElementById('myImage');
-    // image.src = "data:image/jpeg;base64," + imageData;
-}
+	// 	function onSuccess(imageData) {
+	// 		alert('hello');
+	// 		// $scope.cameraPic = "data:image/jpeg;base64," + imageData;
+	// 	    // var image = document.getElementById('myImage');
+	// 	    // image.src = "data:image/jpeg;base64," + imageData;
+	// 	}
 
-function onFail(message) {
-    alert('Failed because: ' + message);
-}
-    };
+	// 	function onFail(message) {
+	// 	    alert('Failed because: ' + message);
+	// 	}
+ //    };
 }])
 
 .controller('FreshlyPressedController', ['$scope', '$ionicLoading', 'freshlyPressedFactory', function($scope, $ionicLoading, freshlyPressedFactory) {

@@ -1,0 +1,13 @@
+<ion-header-bar class="bar-stable">
+<a class="button icon-left ion-chevron-left button-clear button-dark" href="#/dashboard"></a>
+
+<h1 class="title">contacts</h1>
+</ion-header-bar>
+<ion-content>
+	<div class="list card" ng-repeat="contact in contacts">
+		<div class='item' ng-click="openModal(contact)">
+		   {{contact.name}}
+		</div>
+	</div>			
+</ion-content>
+

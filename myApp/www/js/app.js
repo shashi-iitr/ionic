@@ -33,10 +33,22 @@ angular.module('starter', ['ionic','starter.controller', 'starter.directive'])
     controller: 'MapController'
   })
 
-    .state('camera', {
+  .state('camera', {
     url:'/camera',
     templateUrl: 'templates/camera.html',
     controller: 'CameraController'
+  })
+
+  .state('contacts', {
+    url:'/contacts',
+    templateUrl: 'templates/contacts.html',
+    controller: 'ContactController'
+  })
+
+  .state('contactModal', {
+    url:'/contactModal',
+    templateUrl: 'templates/contactModal.html',
+    controller: 'ContactController'
   })
 
   .state('list', {
