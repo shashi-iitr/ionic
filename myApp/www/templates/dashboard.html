@@ -1,41 +1,38 @@
 <ion-side-menus>
   <ion-side-menu-content>
-    <button ng-click="toggleLeftSideMenu()" class="button button-icon icon ion-navicon">
-    </button>
+    <ion-header-bar class="bar-positive">
+      <div class="buttons">
+        <button ng-click="toggleLeftSideMenu()" class="button button-icon icon ion-navicon-round">
+        </button>
+      </div>
+    </ion-header-bar>
   </ion-side-menu-content>
   <ion-side-menu side="left">
-    <header class="bar bar-header bar-stable">
-    </header>
-  <ion-content class="has-header mymenu">
-
-
-  <div class="list">
-    <a class="item item-icon-left" href="#/updateUserDetail">
+    <div class="list">
+      <a class="item item-icon-left" href="#/updateUserDetail">
       <i class="icon ion-ios-person-outline"></i>
       {{ user['name'] }}
-    </a>
+      </a>
 
-    <a menu-close class="item item-icon-left" href="#/grid">
-      <i class="icon ion-ios-keypad-outline"></i>
-      grid demo
-    </a>
+      <a menu-close class="item item-icon-left" href="#/grid">
+        <i class="icon ion-ios-keypad-outline"></i>
+        grid demo
+      </a>
 
-    <a menu-close class="item item-icon-left" href="#/list">
-      <i class="icon ion-ios-list-outline"></i>
-      list map
-    </a>
+      <a menu-close class="item item-icon-left" href="#/list">
+        <i class="icon ion-ios-list-outline"></i>
+        list map
+      </a>
 
-    <a menu-close class="item item-icon-left" href="#/map">
-      <i class="icon ion-map"></i>
-      map demo
-    </a>
-    
-    <a menu-close class="item item-icon-left" href="#/freshlyPressed">
-      <i class="icon ion-ios-printer-outline"></i>
-      freshly pressed
-    </a>
-
-  </div>
-  </ion-content>
+      <a menu-close class="item item-icon-left" href="#/map">
+        <i class="icon ion-map"></i>
+        map demo
+      </a>
+      
+      <a menu-close class="item item-icon-left" href="#/freshlyPressed">
+        <i class="icon ion-ios-printer-outline"></i>
+        freshly pressed
+      </a>
+    </div>
   </ion-side-menu>
 </ion-side-menus>
