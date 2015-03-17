@@ -52,9 +52,8 @@ angular.module('starter.controller', [])
 	};
 }])
 
-.controller('GridController', ['$scope', 'listFactory', function($scope, listFactory) {
+.controller('GridController', ['$scope', function($scope) {
 	console.log('GridController');
-	$scope.items = listFactory.getList();
 }])
 
 .controller('ContactController', ['$scope', 'contactFactory', '$ionicModal', function($scope, contactFactory, $ionicModal) {

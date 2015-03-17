@@ -2,13 +2,9 @@
 <ion-header-bar class="bar-stable">
 <a class="button icon-left ion-chevron-left button-clear button-dark" href="#/dashboard"></a>
 
-<h1 class="title">Map</h1>
+<h1 class="title">Grid</h1>
 </ion-header-bar>
     <ion-content has-header="true" padding="false">
-    <ion-list>
-  <ion-item collection-repeat="item in items">
-    {{item}}
-  </ion-item>
-</ion-list>
-
-    </ion-content></ion-view>
+<ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
+  <div style="width: 5000px; height: 5000px; background: url('https://upload.wikimedia.org/wikipedia/commons/a/ad/Europe_geological_map-en.jpg') repeat"></div>
+ </ion-scroll>    </ion-content></ion-view>
