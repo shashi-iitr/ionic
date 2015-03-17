@@ -5,12 +5,23 @@
 </ion-header-bar>
 
   <ion-content>
+   <div id="search-bar">
+    <div class="item item-input-inset">
+      <label class="item-input-wrapper" id="search-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
+      </label>
+    </div>
+  </div>
+
     <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
     </ion-refresher>
-    <ion-list>
-  <ion-item ng-repeat="item in items" ng-click="showAlert(item)">
-    {{item}}
-  </ion-item>
-    </ion-list>     
+
+	<div class="list">
+    	<div class="item item-thumbnail-left" ng-repeat="product in products" ng-click="openPopover(product, $event)">
+      		<img src="{{product.imageUrl}}">
+      		<h2>{{ product.primaryString}}</h2>
+    	</div>
+	</div>
   </ion-content>
 

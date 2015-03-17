@@ -160,29 +160,68 @@ angular.module('starter.controller', [])
 	};
 }])
 
-.controller('ListController', ['$scope', '$ionicPopup', 'listFactory', function($scope, $ionicPopup, listFactory) {
+.controller('ListController', ['$scope', '$ionicPopover', '$ionicLoading', 'listFactory', function($scope, $ionicPopover, $ionicLoading, listFactory) {
 	console.log('ListController');
-	$scope.items = listFactory.getList();
-	console.log($scope.items);
+	$scope.products = [];
+
+	$ionicLoading.show({
+		content: 'loading',
+		showBackdrop: true
+	});
+	listFactory.getProducts().then(function(response) {
+		console.log(response.data.products);
+		$ionicLoading.hide();
+		$scope.products = response.data.products;
+	}, function(error) {
+		$ionicLoading.hide();
+		console.log(error);
+	});
+
 	$scope.doRefresh = function() {
-		$scope.$broadcast('scroll.refreshComplete');
-		$scope.$apply()
+		listFactory.getProducts().then(function(response) {
+			console.log(response.data.products);
+			$scope.$broadcast('scroll.refreshComplete');
+			$scope.$apply()
+			$scope.products = response.data.products;
+		}, function(error) {
+			console.log(error);
+		});
 	};
 
-	$scope.showAlert = function(item) {
-		var confirmPopup = $ionicPopup.confirm({
-			title: item,
-			template: 'Are you sure you want to have this ' + item + ' ?'
-		});
-		confirmPopup.then(function(res) {
-			if(res) {
-				console.log('You are sure');
-			} else {
-				console.log('You are not sure');
-			}
-		});
+  	$scope.search = function() {
+  	listFactory.doSearch($scope.query)
+  		.then(function(resp){
+  			console.log(resp);
+  		});
+  	};
 
-	};
+	  $ionicPopover.fromTemplateUrl('templates/productPopover.html', {
+	    scope: $scope
+	  }).then(function(popover) {
+	    $scope.popover = popover;
+	  });
+
+	  $scope.openPopover = function(product, $event) {
+	  	$scope.product = product;
+	  	console.log(product);
+	    $scope.popover.show($event);
+	  };
+	  $scope.closePopover = function() {
+	    $scope.popover.hide();
+	  };
+	  //Cleanup the popover when we're done with it!
+	  $scope.$on('$destroy', function() {
+	    $scope.popover.remove();
+	  });
+	  // Execute action on hide popover
+	  $scope.$on('popover.hidden', function() {
+	    // Execute action
+	  });
+	  // Execute action on remove popover
+	  $scope.$on('popover.removed', function() {
+	    // Execute action
+	  });
+
 }])
 
 .controller('MapController', function($scope, $ionicLoading) {
