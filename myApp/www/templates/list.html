@@ -9,7 +9,7 @@
     <div class="item item-input-inset">
       <label class="item-input-wrapper" id="search-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search" ng-model="query" ng-change="search()">
+        <input type="text" placeholder="Search" ng-model="categoryFilter.primaryString">
       </label>
     </div>
   </div>
@@ -18,7 +18,7 @@
     </ion-refresher>
 
 	<div class="list">
-    	<div class="item item-thumbnail-left" ng-repeat="product in products" ng-click="openPopover(product, $event)">
+    	<div class="item item-thumbnail-left" ng-repeat="product in products | filter:categoryFilter" ng-click="openPopover(product, $event)">
       		<img src="{{product.imageUrl}}">
       		<h2>{{ product.primaryString}}</h2>
     	</div>

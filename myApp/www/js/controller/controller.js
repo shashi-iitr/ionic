@@ -162,11 +162,11 @@ angular.module('starter.controller', [])
 .controller('ListController', ['$scope', '$ionicPopover', '$ionicLoading', 'listFactory', function($scope, $ionicPopover, $ionicLoading, listFactory) {
 	console.log('ListController');
 	$scope.products = [];
-
 	$ionicLoading.show({
 		content: 'loading',
 		showBackdrop: true
 	});
+	
 	listFactory.getProducts().then(function(response) {
 		console.log(response.data.products);
 		$ionicLoading.hide();
@@ -186,13 +186,6 @@ angular.module('starter.controller', [])
 			console.log(error);
 		});
 	};
-
-  	$scope.search = function() {
-  	listFactory.doSearch($scope.query)
-  		.then(function(resp){
-  			console.log(resp);
-  		});
-  	};
 
 	  $ionicPopover.fromTemplateUrl('templates/productPopover.html', {
 	    scope: $scope
@@ -223,14 +216,24 @@ angular.module('starter.controller', [])
 
 }])
 
-.controller('MapController', function($scope, $ionicLoading) {
+.controller('MapController', ['$scope', '$ionicLoading', '$ionicPlatform', function($scope, $ionicLoading, $ionicPlatform) {
 	console.log('MapController');
+
+	var isLoadingComplete = false;
 
 	if (document.readyState === "complete") {
 		initialize();
 	} else {
 		google.maps.event.addDomListener(window, 'load', initialize);
 	}
+
+	$ionicPlatform.onHardwareBackButton(function () {
+		if (isLoadingComplete) {
+			window.location.href = '#/dashboard';
+		} else {
+			$ionicLoading.hide();
+		}
+	});
 
 	function initialize () {
 		$ionicLoading.show({
@@ -260,11 +263,11 @@ angular.module('starter.controller', [])
 					});
 				} 
 			});
-
+			isLoadingComplete = true;
 			$ionicLoading.hide();
 		});
 
 		$scope.map = map;
 
 	}
-});
+}]);
